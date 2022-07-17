@@ -9,7 +9,8 @@
     "removeComments": true,
     "sourceMap": true,
     "target": "ESNext",
-    "outDir": "lib"
+    "outDir": "lib",
+    "baseUrl": "."
   },
   "exclude": [
     "node_modules/**/*",

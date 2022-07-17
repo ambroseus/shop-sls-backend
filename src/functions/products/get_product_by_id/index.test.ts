@@ -1,8 +1,8 @@
-import { health_check } from './handler'
+import { get_product_by_id } from './handler'
 
-describe('health check handler', () => {
+describe('get_product_by_id handler', () => {
   it('should return successful response', async () => {
-    const result: any = await health_check()
+    const result: any = await get_product_by_id()
 
     expect(result.statusCode).toEqual(200)
     expect(result.body).toEqual('OK')

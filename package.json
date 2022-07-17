@@ -1,6 +1,6 @@
 {
   "name": "shop-sls-backend",
-  "description": "aws-nodejs-typescript template",
+  "description": "serverless backend for SPA",
   "version": "0.1.0",
   "license": "UNLICENSED",
   "main": "serverless.ts",
@@ -19,8 +19,7 @@
     "@middy/core": "^3.1.0",
     "@middy/http-cors": "^3.1.0",
     "@middy/http-json-body-parser": "^3.1.0",
-    "axios": "^0.27.2",
-    "date-fns": "^2.28.0"
+    "axios": "^0.27.2"
   },
   "devDependencies": {
     "@serverless/typescript": "^3.21.0",

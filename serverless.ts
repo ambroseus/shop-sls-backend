@@ -38,31 +38,6 @@ const serverlessConfiguration: AWS = {
             Action: ['logs:*'],
             Resource: { 'Fn::Sub': 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/*:*:*' },
           },
-          // {
-          //   Effect: 'Allow',
-          //   Action: ['ses:*'],
-          //   Resource: '*',
-          // },
-          // {
-          //   Effect: 'Allow',
-          //   Action: ['sqs:*'],
-          //   Resource: 'arn:aws:sqs:#{AWS::Region}:#{AWS::AccountId}:${self:service}-*',
-          // },
-          // {
-          //   Effect: 'Allow',
-          //   Action: ['sns:*'],
-          //   Resource: 'arn:aws:sns:#{AWS::Region}:#{AWS::AccountId}:${self:service}-*',
-          // },
-          // {
-          //   Effect: 'Allow',
-          //   Action: ['dynamodb:*'],
-          //   Resource: 'arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/${self:service}-*',
-          // },
-          // {
-          //   Effect: 'Allow',
-          //   Action: ['ssm:GetParameter'],
-          //   Resource: 'arn:aws:ssm:#{AWS::Region}:#{AWS::AccountId}:parameter/*',
-          // },
         ],
       },
     },

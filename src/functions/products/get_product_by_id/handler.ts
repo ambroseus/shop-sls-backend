@@ -24,4 +24,4 @@ export const get_product_by_id = async (event: Event) => {
   }
 }
 
-export const handler = middyfy(get_product_by_id)
+export const main = middyfy(get_product_by_id)

@@ -1,3 +1,3 @@
-# Serverless - AWS Node.js Typescript
+# shop-sls-backend
 
-This project has been generated using the `aws-nodejs-typescript` template from the [Serverless framework](https://www.serverless.com/)
+Serverless backend for SPA: https://github.com/ambroseus/shop-react-redux-cloudfront

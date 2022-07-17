@@ -1,6 +1,6 @@
 export type Product = {
-  productId: string
-  name: string
+  id: string
+  title: string
   description: string
   price: number
 }

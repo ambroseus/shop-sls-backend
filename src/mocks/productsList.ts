@@ -2,33 +2,33 @@ import { Product } from '../models/Product'
 
 export const productsList: Product[] = [
   {
-    productId: 'id1',
-    name: 'Product1',
+    id: 'id1',
+    title: 'Product1',
     description: 'product description 1',
-    price: 10,
+    price: 100,
   },
   {
-    productId: 'id2',
-    name: 'Product2',
+    id: 'id2',
+    title: 'Product2',
     description: 'product description 2',
-    price: 20,
+    price: 200,
   },
   {
-    productId: 'id3',
-    name: 'Product3',
+    id: 'id3',
+    title: 'Product3',
     description: 'product description 3',
-    price: 30,
+    price: 300,
   },
   {
-    productId: 'id4',
-    name: 'Product4',
+    id: 'id4',
+    title: 'Product4',
     description: 'product description 4',
-    price: 40,
+    price: 400,
   },
   {
-    productId: 'id5',
-    name: 'Product5',
+    id: 'id5',
+    title: 'Product5',
     description: 'product description 5',
-    price: 50,
+    price: 500,
   },
 ]

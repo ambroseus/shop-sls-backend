@@ -1,7 +1,6 @@
 {
-  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
-    "experimentalDecorators": true,
+    "esModuleInterop": true,
     "lib": ["ESNext"],
     "skipLibCheck": true,
     "moduleResolution": "node",
@@ -12,10 +11,8 @@
     "target": "ESNext",
     "outDir": "lib"
   },
-  "include": ["src/**/*.ts"],
   "exclude": [
     "node_modules/**/*",
-    "src/services/old/**/*",
     ".serverless/**/*",
     ".webpack/**/*",
     "_warmup/**/*",

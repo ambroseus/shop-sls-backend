@@ -4,4 +4,3 @@ node_modules
 *.config.js
 .webpack
 **/*.js
-.env

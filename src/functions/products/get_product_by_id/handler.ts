@@ -3,7 +3,7 @@ import { loggers, errorMessage } from '../../../utils/logger'
 
 const { ERROR } = loggers('get_product_by_id')
 
-const get_product_by_id = async () => {
+export const get_product_by_id = async () => {
   try {
     // await checkServiceState()
     return { statusCode: 200, body: 'OK' }

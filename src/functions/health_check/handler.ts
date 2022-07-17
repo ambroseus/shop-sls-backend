@@ -13,4 +13,4 @@ export const health_check = () => {
   }
 }
 
-export const handler = middyfy(health_check)
+export const main = middyfy(health_check)

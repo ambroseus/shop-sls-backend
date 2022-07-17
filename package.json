@@ -1,0 +1,43 @@
+{
+  "name": "shop-sls-backend",
+  "description": "aws-nodejs-typescript template",
+  "version": "0.1.0",
+  "license": "UNLICENSED",
+  "main": "serverless.ts",
+  "scripts": {
+    "dev": "sls offline",
+    "build": "sls package",
+    "deploy": "sls deploy",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --fix-dry-run 'src/**/*.ts*'",
+    "lint:fix": "eslint --fix 'src/**/*.ts*'",
+    "format": "prettier -c 'src/**/*.ts*'",
+    "format:fix": "prettier --write 'src/**/*.ts*'",
+    "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@middy/core": "^3.1.0",
+    "@middy/http-cors": "^3.1.0",
+    "@middy/http-json-body-parser": "^3.1.0",
+    "axios": "^0.27.2",
+    "date-fns": "^2.28.0"
+  },
+  "devDependencies": {
+    "@serverless/typescript": "^3.21.0",
+    "@types/aws-lambda": "^8.10.101",
+    "@types/openid-client": "^3.7.0",
+    "@types/node": "^18.0.5",
+    "aws-sdk": "^2.1176.0",
+    "serverless": "3.21.0",
+    "serverless-bundle": "^5.4.0",
+    "serverless-offline": "^8.8.1",
+    "ts-node": "^10.9.1",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
+    "eslint": "^8.20.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
+  }
+}

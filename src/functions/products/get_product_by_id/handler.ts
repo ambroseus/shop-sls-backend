@@ -1,12 +1,23 @@
-import { middyfy } from '../../../utils/lambda'
-import { loggers, errorMessage } from '../../../utils/logger'
+import { middyfy, loggers, errorMessage, formatJSONResponse } from '../../../utils'
+import { getProductById } from '../../../services/products'
 
 const { ERROR } = loggers('get_product_by_id')
 
-export const get_product_by_id = async () => {
+type Event = {
+  pathParameters: {
+    productId: unknown
+  }
+}
+
+export const get_product_by_id = async (event: Event) => {
   try {
-    // await checkServiceState()
-    return { statusCode: 200, body: 'OK' }
+    const { productId } = event.pathParameters
+
+    const product = await getProductById(String(productId))
+    if (!product) return { statusCode: 404 }
+
+    return formatJSONResponse(product)
+    //
   } catch (e) {
     ERROR(errorMessage(e))
     return { statusCode: 500 }

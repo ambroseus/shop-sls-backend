@@ -1,7 +1,5 @@
-import { middyfy, formatJSONResponse } from '../../../utils/lambda'
-import { loggers, errorMessage } from '../../../utils/logger'
-
-import { getProductsList } from '../../../services/products/getProductsList'
+import { middyfy, loggers, errorMessage, formatJSONResponse } from '../../../utils'
+import { getProductsList } from '../../../services/products'
 
 const { ERROR } = loggers('get_products_list')
 

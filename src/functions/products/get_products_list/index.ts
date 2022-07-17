@@ -4,7 +4,7 @@ export default {
     {
       http: {
         method: 'GET',
-        path: 'health-check',
+        path: 'products',
       },
     },
   ],

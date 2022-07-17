@@ -1,9 +1,9 @@
-import { middyfy } from '@libs/lambda'
-import { loggers, errorMessage } from '@libs/logger'
+import { middyfy } from '../../utils/lambda'
+import { loggers, errorMessage } from '../../utils/logger'
 
-const { ERROR } = loggers('healthCheck')
+const { ERROR } = loggers('health_check')
 
-const healthCheck = async () => {
+export const health_check = () => {
   try {
     // await checkServiceState()
     return { statusCode: 200, body: 'OK' }
@@ -13,4 +13,4 @@ const healthCheck = async () => {
   }
 }
 
-export const main = middyfy(healthCheck)
+export const handler = middyfy(health_check)

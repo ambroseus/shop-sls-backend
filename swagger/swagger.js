@@ -54,6 +54,9 @@
               "$ref": "#/definitions/Product"
             }
           },
+          "404": {
+            "description": "Product not found"
+          },
           "500": {
             "description": "server error"
           }
@@ -81,9 +84,6 @@
             "schema": {
               "$ref": "#/definitions/Products"
             }
-          },
-          "404": {
-            "description": "product not found"
           },
           "500": {
             "description": "server error"

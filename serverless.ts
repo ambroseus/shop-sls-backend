@@ -5,6 +5,7 @@ import { health_check, get_product_by_id, get_products_list } from './src/functi
 const serverlessConfiguration: AWS = {
   service: 'aws-practitioner-backend',
   frameworkVersion: '3',
+  configValidationMode: 'error',
   useDotenv: true,
   custom: {
     bundle: {

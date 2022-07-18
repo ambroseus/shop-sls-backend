@@ -5,6 +5,18 @@ export default {
       http: {
         method: 'GET',
         path: 'products',
+        summary: 'Get products list',
+        swaggerTags: ['Products service'],
+        responseData: {
+          200: {
+            description: 'list of products',
+            bodyType: 'Products',
+          },
+          404: {
+            description: 'product not found',
+          },
+          500: 'server error',
+        },
       },
     },
   ],

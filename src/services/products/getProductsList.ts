@@ -1,6 +1,6 @@
-import { Product } from '../../models/Product'
+import { Products } from '../../models/Product'
 import { productsList } from '../../mocks/productsList'
 
-export const getProductsList = async (): Promise<Product[]> => {
+export const getProductsList = async (): Promise<Products> => {
   return productsList
 }

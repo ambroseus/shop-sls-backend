@@ -27,8 +27,11 @@
     },
     "/products/{productId}": {
       "get": {
-        "summary": "get_product_by_id",
+        "summary": "Get product by ID",
         "description": "",
+        "tags": [
+          "Products service"
+        ],
         "operationId": "get_product_by_id.get.products/{productId}",
         "consumes": [
           "application/json"
@@ -46,15 +49,24 @@
         ],
         "responses": {
           "200": {
-            "description": "200 response"
+            "description": "Product with provided ID",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "500": {
+            "description": "server error"
           }
         }
       }
     },
     "/products": {
       "get": {
-        "summary": "get_products_list",
+        "summary": "Get products list",
         "description": "",
+        "tags": [
+          "Products service"
+        ],
         "operationId": "get_products_list.get.products",
         "consumes": [
           "application/json"
@@ -65,7 +77,16 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "200 response"
+            "description": "list of products",
+            "schema": {
+              "$ref": "#/definitions/Products"
+            }
+          },
+          "404": {
+            "description": "product not found"
+          },
+          "500": {
+            "description": "server error"
           }
         }
       }
@@ -100,6 +121,14 @@
       "additionalProperties": false,
       "title": "Product",
       "type": "object"
+    },
+    "Products": {
+      "items": {
+        "$ref": "#/definitions/Product",
+        "title": "Products.[]"
+      },
+      "title": "Products.[]",
+      "type": "array"
     }
   },
   "securityDefinitions": {}

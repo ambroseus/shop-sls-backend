@@ -12,9 +12,6 @@ export default {
             description: 'list of products',
             bodyType: 'Products',
           },
-          404: {
-            description: 'product not found',
-          },
           500: 'server error',
         },
       },

@@ -14,4 +14,4 @@ export const get_products_list = async () => {
   }
 }
 
-export const handler = middyfy(get_products_list)
+export const main = middyfy(get_products_list)

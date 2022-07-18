@@ -2,13 +2,13 @@
             module.exports = {
   "swagger": "2.0",
   "info": {
-    "title": "aws-practitioner-backend",
+    "title": "Ambroseus Store API",
     "version": "1"
   },
   "paths": {
     "/health-check": {
       "get": {
-        "summary": "health_check",
+        "summary": "Check service health",
         "description": "",
         "operationId": "health_check.get.health-check",
         "consumes": [
@@ -20,7 +20,10 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "200 response"
+            "description": "OK"
+          },
+          "500": {
+            "description": "Server error"
           }
         }
       }
@@ -58,7 +61,7 @@
             "description": "Product not found"
           },
           "500": {
-            "description": "server error"
+            "description": "Server error"
           }
         }
       }
@@ -86,7 +89,7 @@
             }
           },
           "500": {
-            "description": "server error"
+            "description": "Server error"
           }
         }
       }

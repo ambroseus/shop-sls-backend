@@ -15,7 +15,7 @@ export default {
           404: {
             description: 'Product not found',
           },
-          500: 'server error',
+          500: 'Server error',
         },
       },
     },

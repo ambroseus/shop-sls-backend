@@ -14,6 +14,7 @@ const serverlessConfiguration: AWS = {
       externals: ['@middy/core', '@middy/http-cors', '@middy/http-json-body-parser', 'axios'],
     },
     autoswagger: {
+      title: 'Ambroseus Store API',
       typefiles: ['./src/models/Product.ts'],
     },
     'serverless-offline': {

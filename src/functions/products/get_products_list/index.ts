@@ -12,7 +12,7 @@ export default {
             description: 'list of products',
             bodyType: 'Products',
           },
-          500: 'server error',
+          500: 'Server error',
         },
       },
     },

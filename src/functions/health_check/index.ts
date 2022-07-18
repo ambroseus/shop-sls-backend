@@ -5,6 +5,11 @@ export default {
       http: {
         method: 'GET',
         path: 'health-check',
+        summary: 'Check service health',
+        responseData: {
+          200: 'OK',
+          500: 'Server error',
+        },
       },
     },
   ],

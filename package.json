@@ -36,6 +36,7 @@
     "jest": "^28.1.3",
     "prettier": "^2.7.1",
     "serverless": "3.21.0",
+    "serverless-auto-swagger": "^2.8.2",
     "serverless-bundle": "^5.4.0",
     "serverless-offline": "^8.8.1",
     "ts-jest": "^28.0.7",

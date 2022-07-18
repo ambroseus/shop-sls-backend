@@ -12,11 +12,14 @@ const serverlessConfiguration: AWS = {
       linting: false,
       externals: ['@middy/core', '@middy/http-cors', '@middy/http-json-body-parser', 'axios'],
     },
+    autoswagger: {
+      typefiles: ['./src/models/Product.ts'],
+    },
     'serverless-offline': {
       useChildProcesses: true,
     },
   },
-  plugins: ['serverless-bundle', 'serverless-offline'],
+  plugins: ['serverless-auto-swagger', 'serverless-bundle', 'serverless-offline'],
   provider: {
     name: 'aws',
     runtime: 'nodejs14.x',

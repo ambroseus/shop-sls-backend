@@ -11,7 +11,7 @@ const serverlessConfiguration: AWS = {
     bundle: {
       sourcemaps: false,
       linting: false,
-      externals: ['@middy/core', '@middy/http-cors', '@middy/http-json-body-parser', 'axios'],
+      externals: ['@middy/core', '@middy/http-cors', '@middy/http-json-body-parser', 'axios', 'pg'],
     },
     autoswagger: {
       title: 'Ambroseus Store API',
@@ -34,6 +34,11 @@ const serverlessConfiguration: AWS = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+      DB_HOST: '${env:DB_HOST}',
+      DB_PORT: '${env:DB_PORT}',
+      DB_USERNAME: '${env:DB_USERNAME}',
+      DB_PASSWORD: '${env:DB_PASSWORD}',
+      DB_DATABASE: '${env:DB_DATABASE}',
     },
     iam: {
       role: {

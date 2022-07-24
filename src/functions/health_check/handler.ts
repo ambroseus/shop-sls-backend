@@ -1,15 +1,22 @@
-import { middyfy, loggers, errorMessage } from '../../utils'
+import { middyfy, loggers, formatJSONResponse, errorMessage } from '../../utils'
+import { getProductsList } from '../../services/products'
 
 const { ERROR } = loggers('health_check')
 
-export const health_check = () => {
+export const health_check = async () => {
   try {
-    // await checkServiceState()
-    return { statusCode: 200, body: 'OK' }
+    let DB_STATUS = 'OK'
+    try {
+      await getProductsList(1)
+    } catch (e) {
+      DB_STATUS = 'FAIL'
+    }
+    return formatJSONResponse(200, { DB_STATUS })
     //
   } catch (e) {
-    ERROR(errorMessage(e))
-    return { statusCode: 500 }
+    const message = errorMessage(e)
+    ERROR(message)
+    return formatJSONResponse(500, { message })
   }
 }
 

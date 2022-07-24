@@ -1,5 +1,9 @@
+export type UUID = string
+
+export type ProductId = UUID
+
 export type Product = {
-  id: string
+  id: ProductId
   title: string
   description: string
   price: number

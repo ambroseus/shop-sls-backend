@@ -3,14 +3,15 @@ export default {
   events: [
     {
       http: {
-        method: 'GET',
+        method: 'POST',
         path: 'products',
-        summary: 'Get products list',
+        summary: 'Create product',
         swaggerTags: ['Products service'],
+        bodyType: 'CreateProductPayloadSwagger',
         responseData: {
           200: {
-            description: 'list of products',
-            bodyType: 'Products',
+            description: 'Created product',
+            bodyType: 'Product',
           },
           400: 'Service error',
           500: 'Server error',

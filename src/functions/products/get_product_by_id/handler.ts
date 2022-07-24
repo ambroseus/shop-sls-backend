@@ -1,16 +1,11 @@
+import { APIGatewayEvent } from 'aws-lambda'
 import { Product } from '../../../models/Product'
 import { middyfy, loggers, errorMessage, formatJSONResponse } from '../../../utils'
 import { getProductById } from '../../../services/products'
 
 const { ERROR } = loggers('get_product_by_id')
 
-type Event = {
-  pathParameters: {
-    productId: unknown
-  }
-}
-
-export const get_product_by_id = async (event: Event) => {
+export const get_product_by_id = async (event: Pick<APIGatewayEvent, 'pathParameters'>) => {
   try {
     const { productId } = event.pathParameters
 

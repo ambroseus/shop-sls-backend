@@ -1,8 +1,8 @@
-import { CreateProductPayload, Product } from '../../models/Product'
+import { CreateProduct, Product } from '../../models/Product'
 import { getProductById } from './getProductById'
 import { dbTransaction } from '../../libs/db'
 
-export const createProduct = async (payload: CreateProductPayload): Promise<Product> => {
+export const createProduct = async (payload: CreateProduct): Promise<Product> => {
   const createdId = await dbTransaction(async (client) => {
     const { title, description, price, count } = payload
 

@@ -8,9 +8,11 @@ export type Product = {
 
 export type Products = Product[]
 
-export type CreateProductPayload = Omit<Product, 'id'>
+export type CreateProduct = Omit<Product, 'id'>
 
-export type CreateProductPayloadSwagger = {
+// Swagger types
+
+export type CreateProductPayload = {
   title: string
   description: string
   price: number

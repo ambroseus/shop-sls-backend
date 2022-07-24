@@ -1,4 +1,4 @@
-import { Product, CreateProductPayload } from '../../../models/Product'
+import { Product, CreateProduct } from '../../../models/Product'
 import { APIGatewayEvent } from 'aws-lambda'
 import { middyfy, loggers, errorMessage, formatJSONResponse } from '../../../utils'
 import { createProduct } from '../../../services/products'
@@ -8,7 +8,7 @@ const { ERROR } = loggers('create_product')
 export const create_product = async (event: Pick<APIGatewayEvent, 'body'>) => {
   try {
     // event.body parsed by middy bodyParser
-    const payload = event.body as unknown as CreateProductPayload
+    const payload = event.body as unknown as CreateProduct
     let createdProduct: Product
     try {
       createdProduct = await createProduct(payload)

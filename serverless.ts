@@ -1,6 +1,6 @@
 import type { AWS } from '@serverless/typescript'
 
-import { health_check, get_product_by_id, get_products_list } from './src/functions'
+import { health_check, get_product_by_id, get_products_list, create_product } from './src/functions'
 
 const serverlessConfiguration: AWS = {
   service: 'aws-practitioner-backend',
@@ -56,6 +56,7 @@ const serverlessConfiguration: AWS = {
     health_check,
     get_product_by_id,
     get_products_list,
+    create_product,
   },
 }
 

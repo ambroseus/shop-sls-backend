@@ -1,4 +1,4 @@
-import { Pool, QueryConfig, QueryResult } from 'pg'
+import { Pool, QueryConfig, QueryResult, PoolClient } from 'pg'
 
 const pool = new Pool({
   host: process.env.DB_HOST,
@@ -8,13 +8,13 @@ const pool = new Pool({
   database: process.env.DB_DATABASE,
 })
 
-export async function dbQuery<Row = any>(query: string | QueryConfig<any[]>, values?: any[]) {
+export async function dbTransaction<Result = any>(execFn: (client: PoolClient) => Promise<Result>) {
   const client = await pool.connect()
-  let res: QueryResult<Row>
+  let res: Result
   try {
     await client.query('BEGIN')
     try {
-      res = await client.query(query, values)
+      res = await execFn(client)
       await client.query('COMMIT')
     } catch (err) {
       await client.query('ROLLBACK')
@@ -24,4 +24,8 @@ export async function dbQuery<Row = any>(query: string | QueryConfig<any[]>, val
     client.release()
   }
   return res
+}
+
+export async function dbQuery<Row = any>(query: string | QueryConfig<any[]>, values?: any[]) {
+  return await dbTransaction<QueryResult<Row>>((client) => client.query(query, values))
 }

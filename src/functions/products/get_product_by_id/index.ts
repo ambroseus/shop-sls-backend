@@ -12,6 +12,7 @@ export default {
             description: 'Product with provided ID',
             bodyType: 'Product',
           },
+          400: 'Service error',
           404: {
             description: 'Product not found',
           },

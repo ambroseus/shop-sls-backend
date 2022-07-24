@@ -3,11 +3,13 @@ import { APIGatewayEvent } from 'aws-lambda'
 import { middyfy, loggers, errorMessage, formatJSONResponse } from '../../../utils'
 import { deleteProduct } from '../../../services/products'
 
-const { ERROR } = loggers('delete_product')
+const { ERROR, LOG } = loggers('delete_product')
 
 export const delete_product = async (event: Pick<APIGatewayEvent, 'pathParameters'>) => {
   try {
     const { productId } = event.pathParameters
+    LOG(`Deleting product ${productId}`)
+
     let deletedProduct: { id: ProductId }
     try {
       deletedProduct = await deleteProduct(productId)
@@ -17,6 +19,7 @@ export const delete_product = async (event: Pick<APIGatewayEvent, 'pathParameter
       return formatJSONResponse(400, { message })
     }
 
+    LOG(`Deleted product ${productId}`)
     return formatJSONResponse(200, deletedProduct)
     //
   } catch (e) {

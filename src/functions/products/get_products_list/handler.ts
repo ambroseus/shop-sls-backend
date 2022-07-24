@@ -2,13 +2,17 @@ import { Products } from '../../../models/Product'
 import { middyfy, loggers, errorMessage, formatJSONResponse } from '../../../utils'
 import { getProductsList } from '../../../services/products'
 
-const { ERROR } = loggers('get_products_list')
+const { ERROR, LOG } = loggers('get_products_list')
 
 export const get_products_list = async () => {
   try {
+    LOG('Getting list of products')
+
     let products: Products
     try {
       products = await getProductsList()
+
+      LOG(`Got list of products ${JSON.stringify(products, null, 2)}`)
       return formatJSONResponse(200, products)
     } catch (e) {
       const message = errorMessage(e)

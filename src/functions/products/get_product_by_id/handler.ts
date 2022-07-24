@@ -3,11 +3,12 @@ import { Product } from '../../../models/Product'
 import { middyfy, loggers, errorMessage, formatJSONResponse } from '../../../utils'
 import { getProductById } from '../../../services/products'
 
-const { ERROR } = loggers('get_product_by_id')
+const { ERROR, LOG } = loggers('get_product_by_id')
 
 export const get_product_by_id = async (event: Pick<APIGatewayEvent, 'pathParameters'>) => {
   try {
     const { productId } = event.pathParameters
+    LOG(`Getting product ${productId}`)
 
     let product: Product
     try {
@@ -23,6 +24,7 @@ export const get_product_by_id = async (event: Pick<APIGatewayEvent, 'pathParame
       return formatJSONResponse(400, { message })
     }
 
+    LOG(`Got product ${JSON.stringify(product, null, 2)}`)
     return formatJSONResponse(200, product)
     //
   } catch (e) {

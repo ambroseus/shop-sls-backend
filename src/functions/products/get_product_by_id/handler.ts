@@ -1,3 +1,4 @@
+import { Product } from '../../../models/Product'
 import { middyfy, loggers, errorMessage, formatJSONResponse } from '../../../utils'
 import { getProductById } from '../../../services/products'
 
@@ -13,14 +14,26 @@ export const get_product_by_id = async (event: Event) => {
   try {
     const { productId } = event.pathParameters
 
-    const product = await getProductById(String(productId))
-    if (!product) return { statusCode: 404 }
+    let product: Product
+    try {
+      product = await getProductById(String(productId))
+      if (!product) {
+        return formatJSONResponse(404, {
+          message: `Product with ID '${productId}' not found`,
+        })
+      }
+    } catch (e) {
+      const message = errorMessage(e)
+      ERROR(message)
+      return formatJSONResponse(400, { message })
+    }
 
-    return formatJSONResponse(product)
+    return formatJSONResponse(200, product)
     //
   } catch (e) {
-    ERROR(errorMessage(e))
-    return { statusCode: 500 }
+    const message = errorMessage(e)
+    ERROR(message)
+    return formatJSONResponse(500, { message })
   }
 }
 

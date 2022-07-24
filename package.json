@@ -19,7 +19,8 @@
     "@middy/core": "^3.1.0",
     "@middy/http-cors": "^3.1.0",
     "@middy/http-json-body-parser": "^3.1.0",
-    "axios": "^0.27.2"
+    "axios": "^0.27.2",
+    "pg": "^8.7.3"
   },
   "devDependencies": {
     "@serverless/typescript": "^3.21.0",
@@ -27,6 +28,7 @@
     "@types/jest": "^28.1.6",
     "@types/node": "^18.0.5",
     "@types/openid-client": "^3.7.0",
+    "@types/pg": "^8.6.5",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
     "aws-sdk": "^2.1176.0",

@@ -7,7 +7,7 @@ export default {
         path: 'products',
         summary: 'Create product',
         swaggerTags: ['Products service'],
-        bodyType: 'CreateProductPayloadSwagger',
+        bodyType: 'CreateProductPayload',
         responseData: {
           200: {
             description: 'Created product',

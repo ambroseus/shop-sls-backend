@@ -1,13 +1,13 @@
-import { handlerPath } from "@libs/handler-resolver";
+import { handler } from '../../utils'
 
 export default {
-  handler: `${handlerPath(__dirname)}/handler.main`,
-  role: "ImportFilesRole",
+  handler: handler(__dirname),
+  role: 'ImportFilesRole',
   events: [
     {
       http: {
-        method: "get",
-        path: "import",
+        method: 'get',
+        path: 'import',
         request: {
           parameters: {
             querystrings: {
@@ -18,4 +18,4 @@ export default {
       },
     },
   ],
-};
+}

@@ -1,7 +1,2 @@
-import importFileParser from './importFileParser/index'
-import importProductsFile from './importProductsFile/index'
-
-export default {
-  importFileParser,
-  importProductsFile,
-}
+export { default as importFileParser } from './importFileParser/index'
+export { default as importProductsFile } from './importProductsFile/index'

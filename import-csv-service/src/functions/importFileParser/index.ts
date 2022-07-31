@@ -1,7 +1,7 @@
-import { handlerPath } from '../../utils'
+import { handler } from '../../utils'
 
 export default {
-  handler: `${handlerPath(__dirname)}/handler.main`,
+  handler: handler(__dirname),
   role: 'ParseFilesRole',
   events: [
     {

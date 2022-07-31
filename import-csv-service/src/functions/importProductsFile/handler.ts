@@ -1,26 +1,38 @@
-import createError from "http-errors";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
-import type { ValidatedEventAPIGatewayProxyEvent } from "@libs/api-gateway";
-import { formatJSONResponse } from "@libs/api-gateway";
-import { middyfyHttp } from "@libs/lambda";
-import { s3Client } from "@libs/s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { APIGatewayEvent } from 'aws-lambda'
+import { middyfy, loggers, errorMessage, formatJSONResponse } from '../../utils'
+import { PutObjectCommand } from '@aws-sdk/client-s3'
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
+import { s3Client } from '../../libs/s3'
 
-const importProductsFile: ValidatedEventAPIGatewayProxyEvent<unknown> = async (
-  event
-) => {
-  const filename = event.queryStringParameters.name;
-  if (filename == null) {
-    new createError.BadRequest("Missing name query parameter");
+const { ERROR, LOG } = loggers('importProductsFile')
+
+const { IMPORTED_FOLDER, BUCKET_NAME } = process.env
+
+const importProductsFile = async (event: APIGatewayEvent) => {
+  try {
+    const {
+      queryStringParameters: { name: filename },
+    } = event
+
+    if (!filename) {
+      ERROR('Missing name query parameter')
+      return formatJSONResponse(400, { message: 'Missing name query parameter' })
+    }
+    const importFile = new PutObjectCommand({
+      Bucket: BUCKET_NAME,
+      Key: `${IMPORTED_FOLDER}/${filename}`,
+    })
+    const signedUrl = await getSignedUrl(s3Client, importFile, {
+      expiresIn: 60, // 1 minute
+    })
+
+    LOG(`Created signed url: ${signedUrl}`)
+    return formatJSONResponse(200, signedUrl)
+  } catch (e) {
+    const message = errorMessage(e)
+    ERROR(message)
+    return formatJSONResponse(500, { message })
   }
-  const importFile = new PutObjectCommand({
-    Bucket: process.env.BUCKET_NAME,
-    Key: `${process.env.FOLDER_IMPORTED_DATA}/${filename}`,
-  });
-  const signedUrl = await getSignedUrl(s3Client, importFile, {
-    expiresIn: 60, // 1 minute
-  });
-  return formatJSONResponse(signedUrl);
-};
+}
 
-export const main = middyfyHttp(importProductsFile);
+export const main = middyfy(importProductsFile)

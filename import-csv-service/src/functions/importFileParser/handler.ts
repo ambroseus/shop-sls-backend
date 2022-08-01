@@ -1,5 +1,5 @@
 import { S3Event } from 'aws-lambda'
-import { middyfy, loggers, errorMessage, formatJSONResponse } from '../../utils'
+import { loggers, errorMessage } from '../../utils'
 import { copyObject, deleteObject, getObject } from '../../libs/s3'
 import { parseCsvStream } from '../../libs/csv'
 
@@ -37,8 +37,7 @@ const importFileParser = async (event: S3Event) => {
   } catch (e) {
     const message = errorMessage(e)
     ERROR(message)
-    return formatJSONResponse(500, { message })
   }
 }
 
-export const main = middyfy(importFileParser)
+export const main = importFileParser

@@ -8,7 +8,7 @@ const { ERROR, LOG } = loggers('importProductsFile')
 
 const { UPLOADED_FOLDER, BUCKET_NAME } = process.env
 
-const importProductsFile = async (event: APIGatewayEvent) => {
+export const importProductsFile = async (event: Pick<APIGatewayEvent, 'queryStringParameters'>) => {
   try {
     const {
       queryStringParameters: { name: filename },

@@ -6,7 +6,7 @@ import { s3Client } from '../../libs/s3'
 
 const { ERROR, LOG } = loggers('importProductsFile')
 
-const { IMPORTED_FOLDER, BUCKET_NAME } = process.env
+const { UPLOADED_FOLDER, BUCKET_NAME } = process.env
 
 const importProductsFile = async (event: APIGatewayEvent) => {
   try {
@@ -15,12 +15,16 @@ const importProductsFile = async (event: APIGatewayEvent) => {
     } = event
 
     if (!filename) {
-      ERROR('Missing name query parameter')
-      return formatJSONResponse(400, { message: 'Missing name query parameter' })
+      const message = 'Missing name query parameter'
+      ERROR(message)
+      return formatJSONResponse(400, { message })
     }
+
+    LOG(`Creating signed url`)
+
     const importFile = new PutObjectCommand({
       Bucket: BUCKET_NAME,
-      Key: `${IMPORTED_FOLDER}/${filename}`,
+      Key: `${UPLOADED_FOLDER}/${filename}`,
     })
     const signedUrl = await getSignedUrl(s3Client, importFile, {
       expiresIn: 60, // 1 minute

@@ -33,6 +33,8 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       BUCKET_NAME: '${env:BUCKET_NAME}',
+      UPLOADED_FOLDER: '${env:UPLOADED_FOLDER}',
+      PARSED_FOLDER: '${env:PARSED_FOLDER}',
     },
     iam: {
       role: {
@@ -48,21 +50,6 @@ const serverlessConfiguration: AWS = {
   },
   resources: {
     Resources: {
-      ImportFilesBucket: {
-        Type: 'AWS::S3::Bucket',
-        Properties: {
-          BucketName: '${self:custom.BucketName}',
-          CorsConfiguration: {
-            CorsRules: [
-              {
-                AllowedHeaders: ['*'],
-                AllowedMethods: ['GET', 'PUT'],
-                AllowedOrigins: ['*'],
-              },
-            ],
-          },
-        },
-      },
       ParseFilesRole: {
         Type: 'AWS::IAM::Role',
         Properties: {

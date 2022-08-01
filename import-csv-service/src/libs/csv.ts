@@ -11,7 +11,7 @@ export const parseCsvStream = (stream: Readable) => {
       .pipe(csvParser())
       .on('error', reject)
       .on('data', (record) => {
-        LOG(`Record: ${record}`)
+        LOG(`Record: ${JSON.stringify(record, null, 2)}`)
         data.push(record)
       })
       .on('end', () => {

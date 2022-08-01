@@ -7,8 +7,6 @@ import { importProductsFile } from './handler'
 
 describe('importProductsFile handler', () => {
   it('should return error if no name in query params', async () => {
-    //jest.spyOn(svcProduct, 'getProductById').mockResolvedValue(productsList[0])
-
     const result: any = await importProductsFile({ queryStringParameters: {} })
 
     expect(result.statusCode).toEqual(400)
@@ -20,7 +18,7 @@ describe('importProductsFile handler', () => {
     const testUrl = 'testUrl'
     getSignedUrlMock.mockResolvedValue(testUrl)
 
-    const result: any = await importProductsFile({ queryStringParameters: { name: 'test.csv' } })
+    const result: any = await importProductsFile({ queryStringParameters: { name: 'name' } })
 
     expect(result).toEqual({
       statusCode: 200,

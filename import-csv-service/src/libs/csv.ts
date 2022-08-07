@@ -4,7 +4,7 @@ import csvParser from 'csv-parser'
 
 const { LOG } = loggers('parseCsvStream')
 
-export const parseCsvStream = (stream: Readable) => {
+export const parseCsvStream = (stream: Readable): Promise<Array<any>> => {
   return new Promise((resolve, reject) => {
     const data = []
     stream

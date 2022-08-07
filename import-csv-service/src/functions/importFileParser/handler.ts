@@ -1,11 +1,12 @@
 import { S3Event } from 'aws-lambda'
 import { loggers, errorMessage } from '../../utils'
 import { copyObject, deleteObject, getObject } from '../../libs/s3'
+import SQS, { SendMessageRequest } from 'aws-sdk/clients/sqs'
 import { parseCsvStream } from '../../libs/csv'
 
 const { ERROR, LOG } = loggers('importFileParser')
-
-const { UPLOADED_FOLDER, PARSED_FOLDER } = process.env
+const { REGION = '', UPLOADED_FOLDER = '', PARSED_FOLDER = '', CATALOG_ITEMS_QUEUE_URL = '' } = process.env
+const sqs = new SQS({ region: REGION })
 
 const importFileParser = async (event: S3Event) => {
   try {
@@ -20,6 +21,16 @@ const importFileParser = async (event: S3Event) => {
 
       const { Body: csvStream } = await getObject(input)
       const records = await parseCsvStream(csvStream)
+
+      LOG(`Queue products creation via ${CATALOG_ITEMS_QUEUE_URL}`)
+
+      for (const record of records) {
+        const sqsRequest: SendMessageRequest = {
+          QueueUrl: CATALOG_ITEMS_QUEUE_URL,
+          MessageBody: JSON.stringify(record),
+        }
+        await sqs.sendMessage(sqsRequest).promise()
+      }
 
       LOG(`Parsed records: ${JSON.stringify(records, null, 2)}`)
 

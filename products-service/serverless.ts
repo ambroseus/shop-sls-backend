@@ -39,6 +39,8 @@ const serverlessConfiguration: AWS = {
       DB_USERNAME: '${env:DB_USERNAME}',
       DB_PASSWORD: '${env:DB_PASSWORD}',
       DB_DATABASE: '${env:DB_DATABASE}',
+      REGION: '${self:provider.region}',
+      TOPIC_ARN: { Ref: 'SNSTopic' },
     },
     iam: {
       role: {
@@ -48,7 +50,48 @@ const serverlessConfiguration: AWS = {
             Action: ['logs:*'],
             Resource: { 'Fn::Sub': 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/*:*:*' },
           },
+          {
+            Effect: 'Allow',
+            Action: 'sqs:*',
+            Resource: [{ 'Fn::GetAtt': ['SQSQueue', 'Arn'] }],
+          },
+          {
+            Effect: 'Allow',
+            Action: 'sns:*',
+            Resource: [{ Ref: 'SNSTopic' }],
+          },
         ],
+      },
+    },
+  },
+  resources: {
+    Resources: {
+      SQSQueue: {
+        Type: 'AWS::SQS::Queue',
+        Properties: { QueueName: 'catalogItemsQueue' },
+      },
+      SNSTopic: {
+        Type: 'AWS::SNS::Topic',
+        Properties: { TopicName: 'createProductTopic' },
+      },
+      SNSSubscription: {
+        Type: 'AWS::SNS::Subscription',
+        Properties: {
+          Endpoint: 'yevhenii_samonenko@epam.com',
+          Protocol: 'email',
+          TopicArn: { Ref: 'SNSTopic' },
+        },
+      },
+      SNSSubscriptionHaveZeroCount: {
+        Type: 'AWS::SNS::Subscription',
+        Properties: {
+          Endpoint: 'ambroseus@gmail.com',
+          Protocol: 'email',
+          TopicArn: { Ref: 'SNSTopic' },
+          FilterPolicy: {
+            haveZeroCount: [{ numeric: ['=', 1] }],
+          },
+        },
       },
     },
   },

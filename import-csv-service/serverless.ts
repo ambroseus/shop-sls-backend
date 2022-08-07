@@ -35,6 +35,9 @@ const serverlessConfiguration: AWS = {
       BUCKET_NAME: '${env:BUCKET_NAME}',
       UPLOADED_FOLDER: '${env:UPLOADED_FOLDER}',
       PARSED_FOLDER: '${env:PARSED_FOLDER}',
+      REGION: '${self:provider.region}',
+      CATALOG_ITEMS_QUEUE_URL:
+        'https://sqs.${self:provider.region}.amazonaws.com/${env:AWS_ACCOUNT_ID}/catalogItemsQueue',
     },
     iam: {
       role: {
@@ -83,6 +86,11 @@ const serverlessConfiguration: AWS = {
                     Effect: 'Allow',
                     Action: ['logs:CreateLogGroup', 'logs:CreateLogStream', 'logs:PutLogEvents'],
                     Resource: 'arn:aws:logs:*:*:log-group:/aws/lambda/*:*:*',
+                  },
+                  {
+                    Effect: 'Allow',
+                    Action: 'sqs:SendMessage',
+                    Resource: { 'Fn::Sub': 'arn:aws:sqs:${AWS::Region}:${AWS::AccountId}:catalogItemsQueue' },
                   },
                 ],
               },

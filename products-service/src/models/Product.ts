@@ -1,3 +1,5 @@
+import joi from 'joi'
+
 export type UUID = string
 
 export type ProductId = UUID
@@ -22,3 +24,10 @@ export type CreateProductPayload = {
   price: number
   count: number
 }
+
+export const ProductSchema = joi.object({
+  title: joi.string().required(),
+  description: joi.string(),
+  price: joi.number().positive().required(),
+  count: joi.number().min(0).required(),
+})

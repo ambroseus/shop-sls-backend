@@ -15,6 +15,15 @@ export default {
             },
           },
         },
+        authorizer: {
+          arn: {
+            'Fn::Sub':
+              'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:authorization-service-dev-basicAuthorizer',
+          },
+          name: 'basicAuthorizer',
+          type: 'TOKEN',
+          identitySource: 'method.request.header.Authorization',
+        },
       },
     },
   ],
